@@ -102,4 +102,49 @@ M5's code, mock alerts, local packaging/build checks and deployment guide are co
 
 ---
 
-> 🧙‍♀️ **Unofficial disclaimer:** This project uses light Harry Potter-inspired naming as a creative metaphor for its room-monitoring features, not as a fan project, derivative work, or official Harry Potter tie-in. The project is an independent, original implementation and is not affiliated with, endorsed by, or connected to J.K. Rowling, Warner Bros. Discovery, or the Harry Potter franchise. Harry Potter and related names are trademarks of their respective owners. Any references are intended as playful thematic comparisons only.
+> ## 🪄✨ The Magic Behind Unseen ✨🪄
+
+(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧  Unseen is my very first big project, so I couldn't resist
+sprinkling in a little magic. The dashboard is my take on an enchanted map 🗺️:
+it shows what's happening in a room, with no camera, no peeking, and no names
+by default. 🦉
+
+### 📜 The Spellbook
+
+| 🔮 What Unseen does | 🪄 Spell it's named after |
+|---|---|
+| Detect whether someone is in a room 👀 | **Homenum Revelio** |
+| Notice a fall and soften the alarm 🛡️ | **Arresto Momentum** |
+| Raise the alarm on a restricted-zone entry 🚨 | **Caterwauling Charm** |
+| Keep identity out of the data 🤫 | **Muffliato** |
+| Delete enrolled data on request 🧹 | **Obliviate** |
+| Show the event history 📖 | **Prior Incantato** |
+| Guard against tampering 🔒 | **Protego** |
+
+### 🗺️ The Map (Dashboard)
+Every room shows up as *occupied* or *empty*, like footprints appearing on
+parchment. 👣 Device health, alerts and events live here too.
+
+### 🪄 Wand Fitting (Calibration)
+Before the first spell, every room gets fitted: a quick calibration so
+Unseen learns what "quiet" looks like in *your* space. ✨
+
+### 🔮 Divination Class (ML Experiments)
+Models try to guess what happened from the signal. Some predictions are
+cloudy ☁️, so the rule-based fall detector stays in charge and the models
+only whisper suggestions. 🤫
+
+### 🏆 House Points (Tests)
+Every passing test earns a point. 🦁🐍🦅🦡 *(current total: see CI badge)*
+
+### 🕯️ A Note on Privacy
+Unseen watches over a room without ever seeing a face. By default, nobody is
+named, nobody is filmed, and the data stays unseen. (⊃｡•́‿•̀｡)⊃━☆ﾟ.*･｡ﾟ
+
+---
+
+> 🧙‍♀️ **Unofficial disclaimer:** Unseen is an independent, non-commercial
+> student project. It is not affiliated with, endorsed by, or connected to
+> J.K. Rowling, Warner Bros. Discovery, or the Harry Potter franchise. Harry
+> Potter and related names are trademarks of their respective owners. All
+> references here are a fan homage, just for fun. ✨
