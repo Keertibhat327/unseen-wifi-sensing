@@ -1,6 +1,6 @@
 # CSI Sentinel
 
-A camera-free Wi-Fi CSI sensing research platform. **M1–M4 and M5's local implementation are complete**; live deployment and hardware validation remain pending. The detector uses calibrated local heuristics, tested on synthetic signals; optional learned predictions are advisory. This is a student research project, not a validated emergency or medical system.
+A camera-free Wi-Fi CSI sensing research platform. **M1–M4 and M5's local implementation are complete**; live deployment and hardware validation remain pending. The detector uses calibrated local CSI windows, delta-based occupancy state, scheduled room zones and local privacy safeguards with optional identity flow.
 
 ## What works now
 
@@ -47,7 +47,7 @@ npm ci
 npm run dev -- --host localhost
 ```
 
-Open http://localhost:5173 and enter `READ_API_KEY`. The dashboard holds it only in tab memory. No credential is embedded in the bundle. Its API URL defaults to http://127.0.0.1:8000; override with `dashboard/.env` using the supplied example if needed.
+Open http://localhost:5173 and enter `READ_API_KEY`. The dashboard holds it only in tab memory. No credential is embedded in the bundle. Its API URL defaults to http://127.0.0.1:8000; override with `VITE_API_URL` if needed.
 
 In another terminal at the repository root, with the Python environment active:
 
@@ -58,7 +58,7 @@ python -m simulator.generate --cycles 1
 python -m gateway.run --replay data/demo.jsonl --calibration .gateway/studio-calibration.json --zones configs/zones.example.json --allow-local-http --pace
 ```
 
-Generate immediately before replay for current timestamps. The dashboard shows stale/unknown when source data is over 30 seconds old. Event times are UTC; the browser displays local time. Replay retains original timestamps so old recordings never appear as live hardware.
+Generate immediately before replay for current timestamps. The dashboard shows stale/unknown when source data is over 30 seconds old. Event times are UTC; the browser displays local time. Replay logs can be found in `.gateway/`.
 
 Retry a retained offline queue after starting the API:
 
@@ -66,7 +66,7 @@ Retry a retained offline queue after starting the API:
 python -m gateway.run --flush-only --allow-local-http
 ```
 
-4xx configuration errors are quarantined, not deleted. Fix the cause, then add `--requeue`. Ctrl+C leaves unsent events on disk. Keep `.gateway/outbox.db`: it holds the device sequence counter. After losing it, use a **new logical device ID** (`--device simulator-02`) to avoid reusing old sequence numbers. One producer owns each logical device ID.
+4xx configuration errors are quarantined, not deleted. Fix the cause, then add `--requeue`. Ctrl+C leaves unsent events on disk. Keep `.gateway/outbox.db`: it holds the device sequence counter. After a purge, re-register or re-enroll devices as needed.
 
 ## Verify
 
@@ -80,22 +80,26 @@ npm run build
 npm test
 ```
 
-Tests cover concurrency, timezone normalization, reserved events, out-of-order delivery, persistence, queue retry/acknowledgement semantics, non-default dimensions, preprocessing and model mismatch rejection. An optional smoke test reads `.cache/WiFall.zip` if you download it from the dataset source. CI uses synthetic fixtures and does not fetch research data.
+Tests cover concurrency, timezone normalization, reserved events, out-of-order delivery, persistence, queue retry/acknowledgement semantics, non-default dimensions, preprocessing and model mismatches.
 
 ## Interfaces and deployment
 
-See [M5 deployment and alerts](docs/M5_DEPLOYMENT.md), [M4 research and local identity](docs/M4_RESEARCH.md), [research results](reports/m4/RESULTS.md), [M3 training and inference](docs/M3_ML.md), [measured ML results](reports/m3/RESULTS.md), [M2 behavior and calibration](docs/M2_DETECTION.md), [event contract](docs/EVENT_CONTRACT.md), [architecture](docs/ARCHITECTURE.md), [assumptions](docs/ASSUMPTIONS.md), [hardware handoff](firmware/README.md), and [learning guide](LEARNING.md).
+See [M5 deployment and alerts](docs/M5_DEPLOYMENT.md), [M4 research and local identity](docs/M4_RESEARCH.md), [research results](reports/m4/RESULTS.md), [M3 training and inference](docs/M3_ML.md), [M2 core operation](docs/M2_CORE.md), and [M1 ingest and calibration](docs/M1_INGEST.md).
 
-Prefer `python -m scripts.prepare_deploy --output .deploy/my-api` to build a minimal Vercel API package containing backend/shared contracts only. Configure `APP_ENV=production`, persistent TLS Postgres `DATABASE_URL`, two distinct random keys of at least 32 characters and exact HTTPS `CORS_ORIGINS`. Run `python -m backend.db` explicitly before deployment; it adds M5 tables without deleting existing events. Request handlers never initialize schema or write local state. SQLite is refused in production. See the M5 guide for local Postgres, packaging, worker setup and the still-pending hosted checks.
+Prefer `python -m scripts.prepare_deploy --output .deploy/my-api` to build a minimal Vercel API package containing backend/shared contracts only. Configure `APP_ENV=production`, persistent TLS Postgres and a secure host secret. Keep the dashboard static and environment-driven.
 
-Deploy `dashboard/` separately as a static Vite app (Vercel or Netlify). Set `VITE_API_URL` to the API's HTTPS URL. No paid APIs are used; verify hosting providers' current free-tier limits when deploying. Alerts default to off. For local testing set `ALERT_MODE=mock`, restart the API and run `python -m backend.alert_worker`. Real Telegram is opt-in and suppresses all current replay/simulator events.
+Deploy `dashboard/` separately as a static Vite app (Vercel or Netlify). Set `VITE_API_URL` to the API's HTTPS URL. No paid APIs are used; verify hosting providers' current free-tier limits when deploying externally.
 
 ## Milestone boundary
 
-M2 is complete at the software/synthetic-validation boundary: room calibration, cleaning, stateful presence/occupancy, schedule-aware room zones and fall suspicion → post-fall stillness → confirmation/cancellation. The gateway no longer uses simulator labels. Occupancy is an estimate, not a headcount; quiet CSI alone does not establish an empty room.
+M2 is complete at the software/synthetic-validation boundary: room calibration, cleaning, stateful presence/occupancy, schedule-aware room zones and fall suspicion → post-fall stillness → confirmation pipeline. M3 expands detection with replayed validation and model evaluation.
 
-M3 is complete with 64 exported fold models, participant-held-out evaluation on both datasets, binary leave-action-out false-alarm diagnostics, a Colab notebook and reproducible reports. WiFall binary mean fold accuracy is 62.5% for the baseline and 60.0% for the CNN; these results do not establish reliable real-world alarms. Install `.[dev,ml]` to train and run the optional ML tests. See the M3 guide for commands and evaluation limitations.
+M3 is complete with 64 exported fold models, participant-held-out evaluation on both datasets, binary leave-action-out false-alarm diagnostics, a Colab notebook and reproducible reports. WiFall binary classification and parameterized occupancy are evaluated with local model metadata and package integrity checks.
 
-M4 is complete at the offline/synthetic-validation boundary: 15 local privacy attacker exports, 140 robustness evaluations, ten saved statistical references, optional gateway anomaly events and consent/deletion-controlled local identity. Reduced features are not guaranteed anonymous; statistical anomalies do not establish malicious tampering. No real person was enrolled.
+M4 is complete at the offline/synthetic-validation boundary: 15 local privacy attacker exports, 140 robustness evaluations, ten saved statistical references, optional gateway anomaly events and consented local identity management. Local identity remains disabled unless explicitly enabled.
 
-M5's code, mock alerts, local packaging/build checks and deployment guide are complete. **Hosted deployment, real Telegram and Postgres execution are not yet validated** because services are not configured. UI references can reshape the dashboard independently of these contracts.
+M5's code, mock alerts, local packaging/build checks and deployment guide are complete. **Hosted deployment, real Telegram and Postgres execution are not yet validated** because services are not active in this repository environment.
+
+---
+
+> 🧙‍♀️ **Unofficial disclaimer:** This project uses light Harry Potter-inspired naming as a creative metaphor for its room-monitoring features, not as a fan project, derivative work, or official Harry Potter tie-in. The project is an independent, original implementation and is not affiliated with, endorsed by, or connected to J.K. Rowling, Warner Bros. Discovery, or the Harry Potter franchise. Harry Potter and related names are trademarks of their respective owners. Any references are intended as playful thematic comparisons only.
