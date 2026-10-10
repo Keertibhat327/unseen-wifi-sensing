@@ -1,0 +1,18 @@
+{
+  "raw": {
+    "mean_accuracy": 0.6059743892734266,
+    "mean_macro_f1": 0.42584659347957493
+  },
+  "reduced": {
+    "mean_accuracy": 0.5074750927974874,
+    "mean_macro_f1": 0.521757011477508
+  },
+  "lower_rate": {
+    "mean_accuracy": 0.5321253530383264,
+    "mean_macro_f1": 0.46457040417969353
+  },
+  "majority_control": {
+    "mean_accuracy": 0.6752907856180717,
+    "mean_macro_f1": 0.08060070828001913
+  }
+}

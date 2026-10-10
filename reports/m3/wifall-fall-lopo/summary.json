@@ -1,0 +1,65 @@
+{
+  "created_at": "2026-10-10T07:28:46.576967+00:00",
+  "task": "fall",
+  "protocol": "lopo",
+  "dataset": "wifall",
+  "settings": {
+    "seed": 42,
+    "validation_fraction": 0.2,
+    "baseline_max_iter": 1000,
+    "cnn_epochs": 10,
+    "cnn_batch_size": 64,
+    "cnn_learning_rate": 0.001,
+    "cnn_channels": 16,
+    "cnn_patience": 3
+  },
+  "partial_run": false,
+  "skipped_folds": [],
+  "versions": {
+    "numpy": "2.4.4",
+    "scikit-learn": "1.8.0",
+    "torch": "2.14.0"
+  },
+  "models": {
+    "baseline": {
+      "evaluated_folds": 10,
+      "mean_fold_accuracy": 0.6254138182635497,
+      "mean_fold_macro_f1": 0.5937181897087518,
+      "fold_macro_f1_std": 0.10425153887646452,
+      "pooled_confusion_matrix": [
+        [
+          577,
+          473
+        ],
+        [
+          208,
+          818
+        ]
+      ],
+      "labels": [
+        "nonfall",
+        "fall"
+      ]
+    },
+    "cnn": {
+      "evaluated_folds": 10,
+      "mean_fold_accuracy": 0.600343233625726,
+      "mean_fold_macro_f1": 0.555584841522567,
+      "fold_macro_f1_std": 0.13400989438591135,
+      "pooled_confusion_matrix": [
+        [
+          396,
+          654
+        ],
+        [
+          288,
+          738
+        ]
+      ],
+      "labels": [
+        "nonfall",
+        "fall"
+      ]
+    }
+  }
+}

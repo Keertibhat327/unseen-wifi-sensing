@@ -1,0 +1,7 @@
+{
+  "seed": 42,
+  "conditions": [
+    ["clean", 0], ["noise", 0.25], ["noise", 1.0],
+    ["packet_loss", 0.1], ["packet_loss", 0.4], ["drift", 0.5], ["drift", 2.0]
+  ]
+}

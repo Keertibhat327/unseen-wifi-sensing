@@ -1,0 +1,11 @@
+{
+  "sample_rate_hz": 40,
+  "window_samples": 40,
+  "subcarrier_indices": [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],
+  "representation": "amplitude",
+  "pair_order": "real_imag",
+  "drop_first_invalid_bytes": false,
+  "invalid_byte_count": 4,
+  "ltf_sections": ["synthetic"],
+  "section_byte_ranges": {"synthetic": [0,32]}
+}

@@ -1,0 +1,42 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+*.pyc
+*.db
+*.db-*
+.env
+.cache/
+node_modules/
+dist/
+data/
+artifacts/
+.gateway/
+.identity/
+.deploy/
+*.log
+
+# secrets and env variants (keep the example file tracked)
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+.vercel/
+
+# local databases
+*.sqlite
+*.sqlite3
+
+# python and tooling
+.coverage
+htmlcov/
+.mypy_cache/
+*.egg-info/
+build/
+
+# OS and editor
+Thumbs.db
+.DS_Store
+.vscode/
+.idea/

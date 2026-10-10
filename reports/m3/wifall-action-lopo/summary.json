@@ -1,0 +1,125 @@
+{
+  "created_at": "2026-10-10T07:26:04.429814+00:00",
+  "task": "action",
+  "protocol": "lopo",
+  "dataset": "wifall",
+  "settings": {
+    "seed": 42,
+    "validation_fraction": 0.2,
+    "baseline_max_iter": 1000,
+    "cnn_epochs": 10,
+    "cnn_batch_size": 64,
+    "cnn_learning_rate": 0.001,
+    "cnn_channels": 16,
+    "cnn_patience": 3
+  },
+  "partial_run": false,
+  "skipped_folds": [],
+  "versions": {
+    "numpy": "2.4.4",
+    "scikit-learn": "1.8.0",
+    "torch": "2.14.0"
+  },
+  "models": {
+    "baseline": {
+      "evaluated_folds": 10,
+      "mean_fold_accuracy": 0.35537704209962706,
+      "mean_fold_macro_f1": 0.22340999845120985,
+      "fold_macro_f1_std": 0.09522584872838556,
+      "pooled_confusion_matrix": [
+        [
+          581,
+          107,
+          97,
+          122,
+          119
+        ],
+        [
+          62,
+          35,
+          25,
+          54,
+          85
+        ],
+        [
+          123,
+          68,
+          3,
+          45,
+          20
+        ],
+        [
+          61,
+          84,
+          33,
+          36,
+          47
+        ],
+        [
+          42,
+          10,
+          10,
+          38,
+          169
+        ]
+      ],
+      "labels": [
+        "fall",
+        "jump",
+        "sit",
+        "stand",
+        "walk"
+      ]
+    },
+    "cnn": {
+      "evaluated_folds": 10,
+      "mean_fold_accuracy": 0.2940001131958341,
+      "mean_fold_macro_f1": 0.15723156132489985,
+      "fold_macro_f1_std": 0.04739871525640513,
+      "pooled_confusion_matrix": [
+        [
+          582,
+          55,
+          2,
+          141,
+          246
+        ],
+        [
+          182,
+          15,
+          4,
+          50,
+          10
+        ],
+        [
+          199,
+          8,
+          0,
+          35,
+          17
+        ],
+        [
+          92,
+          37,
+          7,
+          39,
+          86
+        ],
+        [
+          201,
+          5,
+          2,
+          45,
+          16
+        ]
+      ],
+      "labels": [
+        "fall",
+        "jump",
+        "sit",
+        "stand",
+        "walk"
+      ]
+    }
+  }
+}

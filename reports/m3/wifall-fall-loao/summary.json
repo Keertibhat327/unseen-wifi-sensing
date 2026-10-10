@@ -1,0 +1,70 @@
+{
+  "created_at": "2026-10-10T07:28:16.511051+00:00",
+  "task": "fall",
+  "protocol": "loao",
+  "dataset": "wifall",
+  "settings": {
+    "seed": 42,
+    "validation_fraction": 0.2,
+    "baseline_max_iter": 1000,
+    "cnn_epochs": 10,
+    "cnn_batch_size": 64,
+    "cnn_learning_rate": 0.001,
+    "cnn_channels": 16,
+    "cnn_patience": 3
+  },
+  "partial_run": false,
+  "skipped_folds": [
+    {
+      "fold": "fall",
+      "reason": "training set lacks a target class (cannot learn held-out fall)"
+    }
+  ],
+  "versions": {
+    "numpy": "2.4.4",
+    "scikit-learn": "1.8.0",
+    "torch": "2.14.0"
+  },
+  "models": {
+    "baseline": {
+      "evaluated_folds": 4,
+      "mean_fold_accuracy": 0.7756201684864676,
+      "mean_fold_macro_f1": 0.43009483522078695,
+      "fold_macro_f1_std": 0.0657523129922375,
+      "pooled_confusion_matrix": [
+        [
+          815,
+          235
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "labels": [
+        "nonfall",
+        "fall"
+      ]
+    },
+    "cnn": {
+      "evaluated_folds": 4,
+      "mean_fold_accuracy": 0.7734247927492384,
+      "mean_fold_macro_f1": 0.4294038810542019,
+      "fold_macro_f1_std": 0.06564521665382482,
+      "pooled_confusion_matrix": [
+        [
+          813,
+          237
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "labels": [
+        "nonfall",
+        "fall"
+      ]
+    }
+  }
+}

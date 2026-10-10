@@ -1,0 +1,10 @@
+{
+  "seed": 42,
+  "validation_fraction": 0.2,
+  "baseline_max_iter": 1000,
+  "cnn_epochs": 10,
+  "cnn_batch_size": 64,
+  "cnn_learning_rate": 0.001,
+  "cnn_channels": 16,
+  "cnn_patience": 3
+}

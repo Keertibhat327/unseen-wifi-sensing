@@ -1,0 +1,5 @@
+{
+  "consecutive_windows": 3,
+  "recovery_windows": 3,
+  "gap_tolerance_seconds": 0.1
+}

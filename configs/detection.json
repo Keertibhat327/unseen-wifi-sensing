@@ -1,0 +1,20 @@
+{
+  "calibration_min_windows": 5,
+  "noise_floor": 0.05,
+  "calibration_max_drift_sigma": 4,
+  "cleaning_window_seconds": 0.075,
+  "outlier_sigma": 8,
+  "coherent_carrier_fraction": 0.5,
+  "motion_on_sigma": 8,
+  "motion_off_sigma": 4,
+  "presence_on_sigma": 8,
+  "presence_off_sigma": 4,
+  "presence_enter_seconds": 1,
+  "vacancy_seconds": 8,
+  "fall_impact_sigma": 80,
+  "fall_stillness_sigma": 3,
+  "fall_stillness_seconds": 2,
+  "fall_timeout_seconds": 6,
+  "fall_cooldown_seconds": 3,
+  "gap_tolerance_seconds": 0.15
+}
